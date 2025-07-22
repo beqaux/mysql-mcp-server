@@ -1,0 +1,32 @@
+{
+  "name": "mcp-sql-server",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol (MCP) server for SQL databases, with smart schema context for LLMs. Ready for Cursor IDE and MCP Inspector.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "test": "ts-node test-list-tables.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "mysql2": "^3.9.7",
+    "dotenv": "^16.3.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "keywords": [
+    "mcp",
+    "llm",
+    "sql",
+    "server",
+    "cursor-ide",
+    "mysql",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT"
+}
