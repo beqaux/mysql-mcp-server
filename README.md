@@ -1,4 +1,4 @@
-# MySQL MCP Server for AI's
+# MySQL MCP Server for LLMs
 This project provides an MCP (Model Context Protocol) server for MySQL schema inspection and SQL query suggestion, designed to work seamlessly with the Cursor IDE.
 
 ## Features
