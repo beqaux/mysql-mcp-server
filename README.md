@@ -1,85 +1,98 @@
-# Model Context Protocol (MCP) Server
+# MySQL MCP Server for Model Context Protocol
 
-## Overview
-This project provides a robust, production-ready MCP server that exposes your database schema context to an LLM for SQL generation. It automatically analyzes user questions, determines the relevant tables and relationships, and builds a minimal but complete schema prompt for the LLM—including all necessary join paths, even for many-to-many relationships.
+This project provides an MCP (Model Context Protocol) server for MySQL schema inspection and SQL query suggestion, designed to work seamlessly with the Cursor IDE.
 
 ## Features
-- **Automatic schema introspection**: Reads your database schema and relationships at runtime.
-- **Smart context minimization**: Only includes tables and relationships relevant to the user's question.
-- **Recursive join expansion**: Follows both outgoing and incoming foreign keys, so all join paths (including many-to-many) are included.
-- **Handles complex queries**: No join path is missed, even for deep or indirect relationships.
+- **List all tables** in your MySQL database
+- **Inspect table schemas** (columns and types)
+- **View table relationships** (foreign keys)
+- **Suggest SQL queries** from natural language questions
+- **Optimized for use with Cursor IDE**
 
-## Usage
+## Quick Start (in Cursor IDE)
 
-### 1. Install dependencies
-```sh
+### 1. Prerequisites
+- Node.js (v16+ recommended)
+- MySQL database (with schema you want to inspect)
+- [Cursor IDE](https://www.cursor.so/) with MCP support
+
+### 2. Install Dependencies
+Open a terminal in the project root and run:
+
+```
 npm install
 ```
 
-### 2. Configure your database
-Set your MySQL connection details in your environment (e.g., `.env` file):
-```
-DB_HOST=localhost
-DB_PORT=3306
-DB_USERNAME=youruser
-DB_PASSWORD=yourpass
-DB_DATABASE=yourdb
+### 3. Configure MCP Server (Cursor IDE)
+
+Cursor IDE uses the `C:\Users\{username}\.cursor\mcp.json` file to configure MCP servers. This project includes a sample configuration:
+
+```json
+{
+  "mcpServers": {
+    "sql-mcp-server": {
+      "command": "npx ts-node",
+      "args": [
+        "/path/to/your/project/src/index.ts"
+      ],
+      "env": {
+        "DB_HOST": "localhost",
+        "DB_PORT": "3306",
+        "DB_USERNAME": "your_username",
+        "DB_PASSWORD": "your_password",
+        "DB_DATABASE": "your_database_name"
+      },
+      "cwd": "/path/to/your/project"
+    }
+  }
+}
 ```
 
-### 3. Start the MCP server
-```sh
+- **Edit the `env` section** to match your MySQL credentials and database.
+- Make sure the `args` path points to your `src/index.ts` file.
+
+### 4. Start the MCP Server
+
+In Cursor IDE, the MCP server will be started automatically when you use MCP features (like schema inspection or query suggestion). You can also run it manually:
+
+```
 npx ts-node src/index.ts
 ```
 
-### 4. Query the server (example)
-You can use the provided `test-list-tables.ts` or your own MCP client to send a question:
-```sh
-npx ts-node test-list-tables.ts
-```
-This will:
-- Connect to the MCP server
-- Send a natural language question (e.g., "the tc of the student who takes the courses given by the coordinator")
-- Print the generated schema context prompt
+## Usage in Cursor IDE
+Once your MCP server is configured and running, you can use it in Cursor IDE's agent mode to inspect your database schema and get SQL query suggestions.
 
-## How Schema Expansion Works
+### Available Resources (Data Inspection)
 
-### Direct Table/Column Match
-- The analyzer finds all tables and columns mentioned in the user's question (by name or partial match).
-- These tables are included fully (all columns, all relationships).
+- **list_tables**: Get a list of all tables in your database
+- **get_table_schema**: Get detailed schema information for a specific table (columns, types, constraints)
+- **get_table_relationships**: Get foreign key relationships for a specific table
 
-### Recursive Relationship Expansion
-- For every included table, the system follows **both outgoing and incoming foreign keys**.
-- Every related table is also included fully (all columns, all relationships).
-- This process is recursive: as new tables are added, their relationships are also followed, until no new tables are found.
-- If a related table's name is a substring of any other table name (e.g., `user` in `user_roles`), that table is also included.
+### Example Agent Interactions
 
-### Many-to-Many Relationships
-- Many-to-many relationships are represented by a **join table** (e.g., `user_roles` for `users` and `roles`).
-- The system will automatically include join tables and all their related tables if any side of the relationship is matched in the question.
-- **Best practice:**
-  - Name your join tables clearly, e.g., `student_courses`, `user_roles`.
-  - Ensure foreign keys are set up from the join table to both related tables.
-- **Example:**
-  - If the question mentions `users` and `roles`, the analyzer will include `users`, `roles`, and `user_roles` (with all columns and relationships).
-  - If only `users` is mentioned, but `user_roles` exists and points to `roles`, both `user_roles` and `roles` will be included.
+ **Get Query Suggestions**:
+   - "suggest_query I need a query to find all active users"
+   - "suggest_query Show me all orders from the last 30 days with customer details"
+   - "suggest_query_pro Find the top 10 customers by total order value"
 
-## Best Practices for Schema Design
-- **Join tables:**
-  - Use clear, descriptive names (e.g., `student_courses`, `user_roles`).
-  - Always set up foreign keys from the join table to both related tables.
-- **Column names:**
-  - Use consistent, descriptive names (e.g., `user_id`, `role_id`).
-- **Avoid ambiguous names:**
-  - Avoid using the same name for different tables or columns unless they are truly the same entity.
+The agent will automatically use the appropriate resources to understand your database structure and provide relevant SQL queries.
+
+
+### SQL Query Suggestion Tools
+
+- **suggest_query**: Suggests a SQL SELECT query for a natural language question, using only the relevant subset of the schema (minimizing token usage for efficiency).
+- **suggest_query_pro**: Suggests a SQL SELECT query using the FULL schema and all relationships (uses more tokens, but provides the most complete context).
+
+**Tip:** Use `suggest_query` for most questions to save tokens. Use `suggest_query_pro` if you want the LLM to see the entire database schema.
+
+## Project Structure
+- `src/index.ts` — Main MCP server implementation
+- `.cursor/mcp.json` — MCP server configuration for Cursor IDE
+- `package.json` — Project dependencies
 
 ## Troubleshooting
-- If your prompt is too large, consider:
-  - Reducing the number of tables/columns in your schema.
-  - Adding logic to limit recursion depth or the number of included tables.
-- If a join path is missing, check your foreign key definitions.
-
-## Contributing
-Pull requests and issues are welcome!
+- Ensure your MySQL server is running and accessible with the credentials in `.cursor/mcp.json`.
+- If you see connection errors, check your environment variables and database permissions.
 
 ## License
 MIT 
