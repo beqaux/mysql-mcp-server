@@ -34,9 +34,7 @@ Below is the correct config format you should use to start your MCP server with 
 
 Cursor Deeplink:
 
-```
-cursor://anysphere.cursor-deeplink/mcp/install?name=mysql-mcp-server-query-builder&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm15c3FsLW1jcC1zZXJ2ZXItcXVlcnktYnVpbGRlciJdLCJlbnYiOnsiREJfSE9TVCI6IjEyNy4wLjAuMSIsIkRCX1BPUlQiOiIzMzA2IiwiREJfVVNFUk5BTUUiOiJyb290IiwiREJfUEFTU1dPUkQiOiIiLCJEQl9EQVRBQkFTRSI6InlvdXJfZGF0YWJhc2VfbmFtZSJ9fQ==
-```
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=mysql-mcp-server-query-builder&config=JTdCJTIyY29tbWFuZCUyMiUzQSUyMm5weCUyMC15JTIwbXlzcWwtbWNwLXNlcnZlci1xdWVyeS1idWlsZGVyJTIyJTJDJTIyZW52JTIyJTNBJTdCJTIyREJfSE9TVCUyMiUzQSUyMjEyNy4wLjAuMSUyMiUyQyUyMkRCX1BPUlQlMjIlM0ElMjIzMzA2JTIyJTJDJTIyREJfVVNFUk5BTUUlMjIlM0ElMjJyb290JTIyJTJDJTIyREJfUEFTU1dPUkQlMjIlM0ElMjIlMjIlMkMlMjJEQl9EQVRBQkFTRSUyMiUzQSUyMnlvdXJfZGF0YWJhc2UlMjIlN0QlN0Q%3D)
 
 You can easily add an MCP server to Cursor using this deeplink by filling in your own database information.
 
