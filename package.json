@@ -1,9 +1,15 @@
 {
-  "name": "mcp-sql-server",
+  "name": "mysql-mcp-server-query-builder",
   "version": "1.0.0",
-  "description": "A Model Context Protocol (MCP) server for SQL databases, with smart schema context for LLMs. Ready for Cursor IDE and MCP Inspector.",
-  "main": "src/index.ts",
+  "description": "MySQL MCP Server for Cursor IDE",
+  "main": "dist/index.js",
+  "bin": {
+    "mysql-mcp-server": "dist/index.js"
+  },
+  "author": "Berkay Kıran",
+  "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "start": "ts-node src/index.ts",
     "test": "ts-node test-list-tables.ts",
     "typecheck": "tsc --noEmit"
@@ -26,7 +32,5 @@
     "cursor-ide",
     "mysql",
     "typescript"
-  ],
-  "author": "",
-  "license": "MIT"
+  ]
 }

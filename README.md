@@ -8,6 +8,39 @@ This project provides an MCP (Model Context Protocol) server for MySQL schema in
 - **Suggest SQL queries** from natural language questions
 - **Optimized for use with Cursor IDE**
 
+## Correct Cursor MCP Server Configuration Example
+
+Below is the correct config format you should use to start your MCP server with Cursor:
+
+```json
+{
+  "mysql-mcp-server-query-builder": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mysql-mcp-server-query-builder"
+    ],
+    "env": {
+      "DB_HOST": "127.0.0.1",
+      "DB_PORT": "3306",
+      "DB_USERNAME": "root",
+      "DB_PASSWORD": "",
+      "DB_DATABASE": "erasmus_management"
+    }
+  }
+}
+```
+
+
+Cursor Deeplink:
+
+```
+cursor://anysphere.cursor-deeplink/mcp/install?name=mysql-mcp-server-query-builder&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm15c3FsLW1jcC1zZXJ2ZXIiXSwiZW52Ijp7IkRCX0hPU1QiOiJsb2NhbGhvc3QiLCJEQl9QT1JUIjoiMzMwNiIsIkRCX1VTRVJOQU1FIjoieW91cl91c2VybmFtZSIsIkRCX1BBU1NXT1JEIjoieW91cl9wYXNzd29yZCIsIkRCX0RBVEFCQVNFIjoieW91cl9kYXRhYmFzZV9uYW1lIn19
+```
+
+You can easily add an MCP server to Cursor using this deeplink by filling in your own database information.
+
+
 ## Quick Start (in Cursor IDE)
 
 ### 1. Prerequisites
@@ -95,3 +128,4 @@ The agent will automatically use the appropriate resources to understand your da
 
 ## License
 MIT 
+
