@@ -25,7 +25,7 @@ Below is the correct config format you should use to start your MCP server with 
       "DB_PORT": "3306",
       "DB_USERNAME": "root",
       "DB_PASSWORD": "",
-      "DB_DATABASE": "erasmus_management"
+      "DB_DATABASE": "your_database_name"
     }
   }
 }
