@@ -1,6 +1,6 @@
 {
   "name": "mysql-mcp-server-query-builder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MySQL MCP Server for Cursor IDE",
   "main": "dist/index.js",
   "bin": {
