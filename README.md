@@ -31,7 +31,7 @@ Below is the correct config format you should use to start your MCP server with 
 }
 ```
 ```
-cursor://anysphere.cursor-deeplink/mcp/install?name=mysql-mcp-server-query-builder&config=
+cursor://anysphere.cursor-deeplink/mcp/install?name=mysql-mcp-server-query-builder&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm15c3FsLW1jcC1zZXJ2ZXItcXVlcnktYnVpbGRlciJdLCJlbnYiOnsiREJfSE9TVCI6IjEyNy4wLjAuMSIsIkRCX1BPUlQiOiIzMzA2IiwiREJfVVNFUk5BTUUiOiJyb290IiwiREJfUEFTU1dPUkQiOiIiLCJEQl9EQVRBQkFTRSI6InlvdXJfZGF0YWJhc2VfbmFtZSJ9fQ==
 ```
 
 
